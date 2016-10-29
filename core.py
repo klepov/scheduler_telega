@@ -44,7 +44,6 @@ else:
                  0]
 
 
-# schedule_on_day = schedules[date.today().weekday()]
 def get_scheduler(choose):
     if choose == 1:
         schedule_on_day = date.today().weekday()
@@ -62,11 +61,7 @@ def get_scheduler(choose):
 def one_day(schedule_on_day):
     list_answer = []
     for schedule in schedule_on_day:
-        time = schedule.get('time')
-        schedule_get = schedule.get('subject')
-        classroom = schedule_get.get('classroom')
-        name = schedule_get.get('name')
-        format = ("\n|{}|  |{}|  |{}|".format(name, time, classroom))
+        format = pop_paramenter(schedule)
         list_answer.append(format)
     return ''.join(list_answer)
 
@@ -80,12 +75,17 @@ def one_week():
         day = days[schedule_on_day]
         list_local_day = []
         for schedule in schedules[schedule_on_day]:
-            time = schedule.get('time')
-            schedule_get = schedule.get('subject')
-            classroom = schedule_get.get('classroom')
-            name = schedule_get.get('name')
-            format = ("(|{}|  |{}|  |{}|) \n".format(name, time, classroom))
+            format = pop_paramenter(schedule)
             list_local_day.append(format)
-        full_format = "\n{} - {}".format(day,''.join(list_local_day))
+        full_format = "\n{} - {}".format(day, ''.join(list_local_day))
         list_answer.append(full_format)
     return (''.join(list_answer))
+
+
+def pop_paramenter(schedule):
+    time = schedule.get('time')
+    schedule_get = schedule.get('subject')
+    classroom = schedule_get.get('classroom')
+    name = schedule_get.get('name')
+    format = ("(|{}|  |{}|  |{}|) \n".format(name, time, classroom))
+    return format
