@@ -49,6 +49,8 @@ def get_scheduler(choose):
         schedule_on_day = date.today().weekday()
     elif choose == 2:
         schedule_on_day = date.today().weekday() + 1
+        if schedule_on_day == 7:
+            schedule_on_day = 0
     elif choose == 3:
         return one_week()
     schedule_on_day = schedules[schedule_on_day]
@@ -77,7 +79,7 @@ def one_week():
         for schedule in schedules[schedule_on_day]:
             format = pop_paramenter(schedule)
             list_local_day.append(format)
-        full_format = "\n{} - {}".format(day, ''.join(list_local_day))
+        full_format = "\n{}\n {}".format(day, ''.join(list_local_day))
         list_answer.append(full_format)
     return (''.join(list_answer))
 
